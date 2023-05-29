@@ -6,11 +6,15 @@ function updateBaseAddress(){
 	location.reload();
 }
 
+let onDelete = null;
 $(document).ready(function(){
 	$.get(`https://${base_address}/api/getAllCollection`, function(data, status){
 		for(let collection of data){
 			$(".collection-list")
-			.append(`<li class="list-group-item" onclick="window.open('./words.html?id=${collection.id}', '_self')">${collection.name}</li>`)
+			.append(`<li class="list-group-item d-flex justify-content-between" onclick="window.open('./words.html?id=${collection.id}', '_self')">
+					${collection.name}
+					<i class="material-icons text-danger" onclick="onDelete(${collection.id})">delete</i>
+					</li>`)
 		}
 	});
 
@@ -29,4 +33,19 @@ $(document).ready(function(){
 	
 		});
 	});
+
+	onDelete = function(num){
+		event.stopPropagation();
+		if(window.confirm("are you sure?")){
+			$.ajax({
+				url: `https://${base_address}/api/${num}/deleteCollection`,
+				type: 'DELETE',
+				success: function(data){
+					location.reload();
+				}
+		
+			});
+		}
+	}
+
 });

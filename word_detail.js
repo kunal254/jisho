@@ -9,10 +9,12 @@ function updateBaseAddress(){
 $(document).ready(function(){
 
     var urlParams = new URLSearchParams(window.location.search);
+	var collectionId = null;
 
     $.get(`https://${base_address}/api/${urlParams.get("id")}/getWord`, function(data, status){
+		collectionId = data.collection.id;
         $(".back-btn").click(function(){
-			window.open(`./words.html?id=${data.collection.id}`, '_self')
+			window.open(`./words.html?id=${collectionId}`, '_self')
 		})
         $("#word").val(data.word)
         $("#definition").text(data.definition)
@@ -36,5 +38,18 @@ $(document).ready(function(){
 	
 		});
     })
+
+	$(".delete").click(function(){
+		if(window.confirm("are you sure?")){
+			$.ajax({
+				url: `https://${base_address}/api/${urlParams.get("id")}/deleteWord`,
+				type: 'DELETE',
+				success: function(data){
+					window.open(`./words.html?id=${collectionId}`, '_self')
+				}
+		
+			});
+		}
+	})
 	
 });
