@@ -9,7 +9,7 @@ function updateBaseAddress(){
 $(document).ready(function(){
 
 	var urlParams = new URLSearchParams(window.location.search);
-	$.get(`http://${base_address}/api/${urlParams.get("id")}/getWords`, function(data, status){
+	$.get(`https://${base_address}/api/${urlParams.get("id")}/getWords`, function(data, status){
 		$("h5").text(data[0].collection.name)
 		for(let item of data){
 			$(".collection-list")
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 	$(".addWord-btn").click(function(){
 		$.ajax({
-			url: `http://${base_address}/api/${urlParams.get("id")}/addWord`,
+			url: `https://${base_address}/api/${urlParams.get("id")}/addWord`,
 			type: 'POST',
 			contentType: "application/json",
 			data: JSON.stringify({

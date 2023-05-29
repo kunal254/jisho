@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     var urlParams = new URLSearchParams(window.location.search);
 
-    $.get(`http://${base_address}/api/${urlParams.get("id")}/getWord`, function(data, status){
+    $.get(`https://${base_address}/api/${urlParams.get("id")}/getWord`, function(data, status){
         $(".back-btn").click(function(){
 			window.open(`./words.html?id=${data.collection.id}`, '_self')
 		})
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
     $(".save-word").click(function(){
         $.ajax({
-			url: `http://${base_address}/api/${urlParams.get("id")}/editWord`,
+			url: `https://${base_address}/api/${urlParams.get("id")}/editWord`,
 			type: 'PUT',
 			contentType: "application/json",
 			data: JSON.stringify({

@@ -7,7 +7,7 @@ function updateBaseAddress(){
 }
 
 $(document).ready(function(){
-	$.get(`http://${base_address}/api/getAllCollection`, function(data, status){
+	$.get(`https://${base_address}/api/getAllCollection`, function(data, status){
 		for(let collection of data){
 			$(".collection-list")
 			.append(`<li class="list-group-item" onclick="window.open('./words.html?id=${collection.id}', '_self')">${collection.name}</li>`)
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	$(".addCollection-btn").click(function(){
 		$.ajax({
-			url: `http://${base_address}/api/addCollection`,
+			url: `https://${base_address}/api/addCollection`,
 			type: 'POST',
 			contentType: "application/json",
 			data: JSON.stringify({
